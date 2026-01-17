@@ -1,7 +1,6 @@
 import express from "express"
 import verifyUser from "../middleware/auth.middleware.js"
-import { addEmployee,  getEmployees, getEmployee, updateEmployee, fetchEmployeesByDepId } from "../controllers/employee.controller.js"
-import upload from "../middleware/multer.js"
+import { addEmployee, upload,  getEmployees, getEmployee, updateEmployee, fetchEmployeesByDepId } from "../controllers/employee.controller.js"
 
 const router = express.Router()
 
