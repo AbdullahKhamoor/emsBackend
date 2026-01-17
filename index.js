@@ -16,8 +16,8 @@ const app = express()
 
 app.use(cors({
     origin: "https://ems-frontend-three-blond.vercel.app",
-    methods: ["GET","POST","PUT","DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    // methods: ["GET","POST","PUT","DELETE"],
+    // allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
 }))
 app.use(express.json())
