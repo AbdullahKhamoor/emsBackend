@@ -75,7 +75,7 @@ console.log("BODY:", req.body)
       salary,
       password,
       role,
-      image: result.secure_url, // ✅ Cloudinary URL
+    //   image: result.secure_url, // ✅ Cloudinary URL
     })
 
     res.status(201).json(employee)
@@ -98,8 +98,8 @@ console.log("BODY:", req.body)
      email,
      password: hashPassword,
      role,
-     profileImage: req.file ? req.file.filename : ""  
-    //  profileImage: imageUrl  
+    //  profileImage: req.file ? req.file.filename : ""  
+     profileImage: imageUrl  
     })
  
    const savedUser = await newUser.save()
