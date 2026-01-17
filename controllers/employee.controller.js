@@ -48,104 +48,23 @@ console.log("BODY:", req.body)
      } = req.body
 
 //  // 🔴 image check
-//     if (!req.file) {
-//       return res.status(400).json({ message: "Image is required" })
-//     }
-
-//     // 🔴 Cloudinary upload
-//     let imageUrl = "";
-//     const result = await cloudinary.uploader.upload(
-//       req.file.path,
-//       {
-//         folder: "employees",
-//       }
-//     )
-//     imageUrl = result.secure_url
-//     // 🔴 Save employee
-//     const employee = await Employee.create({
-//       name,
-//       email,
-//       employeeId,
-//       dob,
-//       gender,
-//       maritalStatus,
-//       designation,
-//       department,
-//       salary,
-//       password,
-//       role,
-//       image: result.secure_url, // ✅ Cloudinary URL
-//     })
-
-//     res.status(201).json(employee)
-    
-     
-
-
-      
-      
- 
-//     const user = await User.findOne({email})
-//     if(user){
-//      return res.status(400).json({success: false, error: "user already registered in employee"})
-//     }
- 
-//     const hashPassword = await bcrypt.hash(password, 10)
- 
-//     const newUser = new User({
-//      name,
-//      email,
-//      password: hashPassword,
-//      role,
-//     //  profileImage: req.file ? req.file.filename : ""  
-//      profileImage: imageUrl  
-//     })
- 
-//    const savedUser = await newUser.save()
-   
-//    const newEmployee = new Employee({
-//      userId: savedUser._id,
-//      employeeId,
-//      dob,
-//      gender,
-//      maritalStatus,
-//      designation,
-//      department,
-//      salary
-//    })
- 
-//    await newEmployee.save()
-//    return res.status(200).json({success:true, message: "employee created"})
-
-//    } catch (error) {
-//     console.log(error.message)
-//     return res.status(500).json({success:false, error: "server error in adding employee"})
-//    }
-if (!req.file) {
+    if (!req.file) {
       return res.status(400).json({ message: "Image is required" })
     }
 
-    const existingUser = await User.findOne({ email })
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" })
-    }
-
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "employees",
-    })
-
-    const hashPassword = await bcrypt.hash(password, 10)
-
-    const newUser = await User.create({
+    // 🔴 Cloudinary upload
+    let imageUrl = "";
+    const result = await cloudinary.uploader.upload(
+      req.file.path,
+      {
+        folder: "employees",
+      }
+    )
+    imageUrl = result.secure_url
+    // 🔴 Save employee
+    const employee = await Employee.create({
       name,
       email,
-      password: hashPassword,
-      role,
-      profileImage: result.secure_url,
-    })
-
-    await Employee.create({
-      userId: newUser._id,
       employeeId,
       dob,
       gender,
@@ -153,17 +72,56 @@ if (!req.file) {
       designation,
       department,
       salary,
+      password,
+      role,
+      image: result.secure_url, // ✅ Cloudinary URL
     })
 
-    return res.status(201).json({
-      success: true,
-      message: "Employee created successfully",
-    })
+    res.status(201).json(employee)
+    
+     
 
-  } catch (error) {
-    console.error(error)
-    return res.status(500).json({ message: "Server error" })
-  }
+
+      
+      
+ 
+    const user = await User.findOne({email})
+    if(user){
+     return res.status(400).json({success: false, error: "user already registered in employee"})
+    }
+ 
+    const hashPassword = await bcrypt.hash(password, 10)
+ 
+    const newUser = new User({
+     name,
+     email,
+     password: hashPassword,
+     role,
+    //  profileImage: req.file ? req.file.filename : ""  
+     profileImage: imageUrl  
+    })
+ 
+   const savedUser = await newUser.save()
+   
+   const newEmployee = new Employee({
+     userId: savedUser._id,
+     employeeId,
+     dob,
+     gender,
+     maritalStatus,
+     designation,
+     department,
+     salary
+   })
+ 
+   await newEmployee.save()
+   return res.status(200).json({success:true, message: "employee created"})
+
+   } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({success:false, error: "server error in adding employee"})
+   }
+
 }
 
 
