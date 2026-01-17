@@ -18,7 +18,7 @@ import bcrypt from "bcrypt"
 //     }
 // })
 
-// const upload = multer({storage: storage}) 
+const upload = multer({storage: storage}) 
 
 
 
