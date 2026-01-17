@@ -6,16 +6,25 @@ import bcrypt from "bcrypt"
 import path from "path"
 
 
-const storage = multer.diskStorage({  
-    destination: (req, file, cb) => {
-        cb(null, "public/uploads")
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname))
-    }
+// const storage = multer.diskStorage({  
+//     destination: (req, file, cb) => {
+//         cb(null, "public/uploads")
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, Date.now() + path.extname(file.originalname))
+//     }
+// })
+
+// const upload = multer({storage: storage}) 
+
+
+const storage = multer.diskStorage({})
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
 })
 
-const upload = multer({storage: storage}) 
 
 const addEmployee  = async (req, res ) => {
    try {
@@ -32,6 +41,26 @@ const addEmployee  = async (req, res ) => {
          password,
          role,
      } = req.body
+
+      if (!req.file) {
+        return res.status(400).json({ message: "Image required" })
+      }
+
+      const result = await cloudinary.uploader.upload(
+        req.file.path,
+        {
+          folder: "employees", // Cloudinary folder
+        }
+      )
+
+      const employee = await Employee.create({
+        name,
+        email,
+        position,
+        image: result.secure_url,
+      })
+
+      res.status(201).json(employee)
  
     const user = await User.findOne({email})
     if(user){
@@ -45,7 +74,8 @@ const addEmployee  = async (req, res ) => {
      email,
      password: hashPassword,
      role,
-     profileImage: req.file ? req.file.filename : ""  
+    //  profileImage: req.file ? req.file.filename : ""  
+     profileImage: result.secure_url  
     })
  
    const savedUser = await newUser.save()
