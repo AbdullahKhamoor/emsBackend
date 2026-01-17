@@ -19,6 +19,10 @@ import path from "path"
 
 // const upload = multer({storage: storage}) 
 
+  console.log("BODY:", req.body)
+console.log("FILE:", req.file)
+
+
 
 const storage = multer.diskStorage({})
 
@@ -44,6 +48,9 @@ const addEmployee  = async (req, res ) => {
          role,
      } = req.body
 
+
+     console.log("BODY:", req.body)
+console.log("FILE:", req.file)
       if (!req.file) {
         return res.status(400).json({ message: "Image required" })
       }
