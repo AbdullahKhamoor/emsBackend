@@ -29,6 +29,9 @@ import bcrypt from "bcrypt"
 
 
 const addEmployee  = async (req, res ) => {
+
+  console.log("FILE:", req.file)
+console.log("BODY:", req.body)
    try {
      const {
          name,
