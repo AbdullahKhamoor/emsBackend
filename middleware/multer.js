@@ -1,5 +1,5 @@
-import multer from "multer"
 
+<<<<<<< HEAD
 const storage = multer.diskStorage({})
 
 const upload = multer({
@@ -8,3 +8,5 @@ const upload = multer({
 })
 
 export default upload
+=======
+>>>>>>> a09478f94a26eac32f498da6b3822e8f85835199
