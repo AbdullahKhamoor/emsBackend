@@ -1,6 +1,8 @@
 import multer from "multer"
 import Employee from "../models/employee.model.js"
 import User  from "../models/user.model.js"
+import "../middleware/multer.js"
+import cloudinary from "../config/cloudinary.js"
 // import Department from "../models/department.model.js"
 import bcrypt from "bcrypt"
 import path from "path"
