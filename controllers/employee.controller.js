@@ -62,6 +62,9 @@ console.log("FILE:", req.file)
         }
       )
 
+
+      console.log("BODY:", req.body)
+console.log("FILE:", req.file)
       const employee = await Employee.create({
         name,
         email,
