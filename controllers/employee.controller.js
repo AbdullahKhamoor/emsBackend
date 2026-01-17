@@ -40,6 +40,7 @@ console.log("BODY:", req.body)
          dob,
          gender,
          maritalStatus,
+
          designation,
          department,
          salary,
@@ -48,9 +49,9 @@ console.log("BODY:", req.body)
      } = req.body
 
 //  // 🔴 image check
-    if (!req.file) {
-      return res.status(400).json({ message: "Image is required" })
-    }
+    // if (!req.file) {
+    //   return res.status(400).json({ message: "Image is required" })
+    // }
 
     // 🔴 Cloudinary upload
     let imageUrl = "";
@@ -97,8 +98,8 @@ console.log("BODY:", req.body)
      email,
      password: hashPassword,
      role,
-    //  profileImage: req.file ? req.file.filename : ""  
-     profileImage: imageUrl  
+     profileImage: req.file ? req.file.filename : ""  
+    //  profileImage: imageUrl  
     })
  
    const savedUser = await newUser.save()
