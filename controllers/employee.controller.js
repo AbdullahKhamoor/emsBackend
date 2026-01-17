@@ -2,7 +2,7 @@
 import Employee from "../models/employee.model.js"
 import User  from "../models/user.model.js"
 // import "../middleware/multer.js"
-import cloudinary from "../config/cloudinary.js"
+import cloudinary from "../config/cloudinaary.js"
 import upload from "../middleware/multer.js"
 // import Department from "../models/department.model.js"
 import bcrypt from "bcrypt"

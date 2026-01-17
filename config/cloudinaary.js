@@ -1,4 +1,4 @@
-import cloudinary from "cloudinary";
+import cloudinaary from "cloudinary";
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,  // tumhara cloud name
@@ -7,4 +7,4 @@ cloudinary.v2.config({
   secure: true
 });
 
-export default cloudinary.v2
+export default cloudinaary.v2
