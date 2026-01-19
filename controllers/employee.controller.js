@@ -49,9 +49,9 @@ console.log("BODY:", req.body)
      } = req.body
 
 //  // 🔴 image check
-    // if (!req.file) {
-    //   return res.status(400).json({ message: "Image is required" })
-    // }
+    if (!req.file) {
+      return res.status(400).json({ message: "Image is required" })
+    }
 
     // 🔴 Cloudinary upload
     let imageUrl = "";
