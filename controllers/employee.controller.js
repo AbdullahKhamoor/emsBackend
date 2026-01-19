@@ -48,10 +48,25 @@ console.log("BODY:", req.body)
          role,
      } = req.body
 
+
+
 //  // 🔴 image check
     if (!req.file) {
       return res.status(400).json({ message: "Image is required" })
     }
+
+
+    const user = await User.findOne({email})
+    if(user){
+     return res.status(400).json({success: false, error: "user already registered in employee"})
+    }
+    
+
+
+
+    const hashPassword = await bcrypt.hash(password, 10)
+
+
 
     // 🔴 Cloudinary upload
     let imageUrl = "";
@@ -63,35 +78,30 @@ console.log("BODY:", req.body)
     )
     imageUrl = result.secure_url
     // 🔴 Save employee
-    const employee = await Employee.create({
-      name,
-      email,
-      employeeId,
-      dob,
-      gender,
-      maritalStatus,
-      designation,
-      department,
-      salary,
-      password,
-      role,
-    //   image: result.secure_url, // ✅ Cloudinary URL
-    })
+        // const employee = await Employee.create({
+        //   name,
+        //   email,
+        //   employeeId,
+        //   dob,
+        //   gender,
+        //   maritalStatus,
+        //   designation,
+        //   department,
+        //   salary,
+        //   password,
+        //   role,
+        // //   image: result.secure_url, // ✅ Cloudinary URL
+        // })
 
-    res.status(201).json(employee)
-    
+        // res.status(201).json(employee)
+        
      
 
 
       
       
  
-    const user = await User.findOne({email})
-    if(user){
-     return res.status(400).json({success: false, error: "user already registered in employee"})
-    }
  
-    const hashPassword = await bcrypt.hash(password, 10)
  
     const newUser = new User({
      name,
