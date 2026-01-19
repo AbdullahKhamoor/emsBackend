@@ -193,9 +193,9 @@ const updateEmployee = async (req, res) => {
         return res.status(404).json({success:false, error: "user not found"})
      }
 
+     
 
-
-     const updateUser = await User.findByIdAndUpdate({_id: employee.userId}, {name,   ...(profileImage && { profileImage })})
+     const updateUser = await User.findByIdAndUpdate({_id: employee.userId}, {name})
      const updateEmployee = await Employee.findByIdAndUpdate({_id: id}, {
         maritalStatus,
         designation,
