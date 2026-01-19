@@ -32,7 +32,9 @@ const employeeSchema = new Schema({
         type: Number,
         required: true
     },
-    
+    profileImage: {
+        type: String,
+    }
 
 },{ timestamps: true }
 )
