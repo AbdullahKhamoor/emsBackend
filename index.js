@@ -1,3 +1,5 @@
+import dotenv from "dotenv"
+dotenv.config();
 import express from "express";
 import cors from "cors"
 import authRouter from "./routes/auth.route.js"
@@ -15,7 +17,10 @@ connectTotDatabase()
 const app = express()
 
 app.use(cors({
-    origin: "https://ems-frontend-three-blond.vercel.app",
+    origin: [
+        "http://localhost:5173",
+        "https://ems-frontend-three-blond.vercel.app"
+    ],
     methods: ["GET","POST","PUT","DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
